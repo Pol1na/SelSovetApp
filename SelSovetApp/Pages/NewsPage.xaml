@@ -1,0 +1,63 @@
+﻿<Page x:Class="SelSovetApp.Pages.NewsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SelSovetApp.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Новости" Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <ListView Grid.Row="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  SelectionMode="Single" Margin="5" x:Name="LViewNews" SelectionChanged="LViewNews_SelectionChanged">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel HorizontalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="White" BorderThickness="1" BorderBrush="#AC3DFF" HorizontalAlignment="Center" CornerRadius="15" Width="600">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <StackPanel Grid.ColumnSpan="2">
+                                    <TextBlock Text="{Binding Title}" TextWrapping="Wrap" HorizontalAlignment="Center" FontSize="20" Margin="5 0"/>
+                                    <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Foreground="Green" Margin="5 0"/>
+                                    <TextBlock Text="_________________________" TextWrapping="Wrap" Foreground="Black" Margin="5 0"/>
+                                    <TextBlock Text="{Binding DateCreate}" Foreground="Black" Margin="5 0"/>
+                                    <TextBlock Text="{Binding User.FullName}" Foreground="Black" Margin="5 0"/>
+                                    <Image Height="200" Width="200" Margin="5" Stretch="Uniform">
+                                        <Image.Source>
+                                            <Binding Path="Image">
+                                                <Binding.TargetNullValue>
+                                                    <BitmapImage UriSource="/Assets/no-image.png"/>
+                                                </Binding.TargetNullValue>
+                                            </Binding>
+                                        </Image.Source>
+                                    </Image>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <StackPanel Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Button Name="BtnAdd" Width="150" Click="BtnAdd_Click">Добавить</Button>
+                    <Button Name="BtnEdit" IsEnabled="False" Width="150" Click="BtnEdit_Click">Редактировать</Button>
+                    <Button Name="BtnDelete" IsEnabled="False" Width="150" Click="BtnDelete_Click">Удалить</Button>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

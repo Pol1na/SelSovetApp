@@ -1,0 +1,78 @@
+﻿<Page x:Class="SelSovetApp.Pages.MyAppealsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SelSovetApp.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Мои обращения" Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center" Style="{StaticResource TBlockLabel}">Поиск:</TextBlock>
+                <TextBox Width="170" Name="TBoxSearch" MaxLength="250" TextChanged="TBoxSearch_TextChanged"/>
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock VerticalAlignment="Center" Style="{StaticResource TBlockLabel}">Фильтрация:</TextBlock>
+                <ComboBox Width="170" Name="CBoxType" DisplayMemberPath="Name" SelectionChanged="CBoxType_SelectionChanged"/>
+            </StackPanel>
+
+
+            <ListView Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  SelectionMode="Single" Margin="5" x:Name="LViewAppeals" SelectionChanged="LViewAppeals_SelectionChanged">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel HorizontalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="White" BorderThickness="1" BorderBrush="#AC3DFF" HorizontalAlignment="Center" CornerRadius="15" Width="600">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Image Height="90" Width="90" Margin="5" Stretch="UniformToFill">
+                                    <Image.Source>
+                                        <Binding Path="Image">
+                                            <Binding.TargetNullValue>
+                                                <BitmapImage UriSource="/Assets/no-image.png"/>
+                                            </Binding.TargetNullValue>
+                                        </Binding>
+                                    </Image.Source>
+                                    <Image.Clip>
+                                        <RectangleGeometry RadiusX="90" RadiusY="90" Rect="0,0,90,90"/>
+                                    </Image.Clip>
+                                </Image>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="{Binding StringFormat= Для кого: {0}, Path = User.FullName}" FontSize="20" Margin="5"/>
+                                    <TextBlock Text="{Binding StringFormat= Статус: {0}, Path = Status.Name}" FontSize="20" Margin="5"/>
+                                    <TextBlock Text="{Binding StringFormat= Результат: {0}, Path = Result.Name}" FontSize="20" Margin="5"/>
+                                    <TextBlock Text="{Binding StringFormat= Дата отправки: {0}, Path = DateStart}" FontSize="20" Margin="5"/>
+                                    <TextBlock Text="{Binding StringFormat= Дата вынесения результата: {0}, Path = DateEnd}" FontSize="20" Margin="5"/>
+                                    <TextBlock Text="{Binding ProductType.Name}" Foreground="#8D3DFF" Margin="5 0"/>
+                                </StackPanel>
+                                <TextBlock Text="{Binding Price,StringFormat='{}{0} руб.'}" HorizontalAlignment="Right" Margin="5"  Grid.Column="1"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <StackPanel Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Button Name="BtnEdit" IsEnabled="False" Width="150" Click="BtnEdit_Click">Редактировать</Button>
+                    <Button Name="BtnAdd" Width="150" Click="BtnAdd_Click">Добавить</Button>
+                    <Button Name="BtnDelete" IsEnabled="False" Width="150" Click="BtnDelete_Click">Удалить</Button>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

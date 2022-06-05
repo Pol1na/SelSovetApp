@@ -1,0 +1,84 @@
+﻿<Application x:Class="SelSovetApp.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:SelSovetApp"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <SolidColorBrush Color="#00FF7F" x:Key="ColorMain"/>
+        <SolidColorBrush Color="#7CFC00" x:Key="ColorMainAccent"/>
+        <SolidColorBrush Color="#00FF00" x:Key="ColorMainActive"/>
+        <SolidColorBrush Color="#00FA9A" x:Key="ColorMainUnactive"/>
+        <SolidColorBrush Color="#ADFF2F" x:Key="ColorSecond"/>
+        <SolidColorBrush Color="	#7FFF00" x:Key="ColorSecondControl"/>
+
+
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI Light"/>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="TBlockLabel">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="Foreground" Value="{StaticResource ColorMain}" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Margin" Value="5 0 0 0" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
+
+        <Style TargetType="TextBox">
+            <Setter Property="FontFamily" Value="Segoe UI Light"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3" />
+                </Style>
+            </Style.Resources>
+        </Style>
+
+        <Style TargetType="PasswordBox">
+            <Setter Property="FontFamily" Value="Segoe UI Light"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="FontFamily" Value="Segoe UI Light"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderThickness" Value="0 0 0 0" />
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource ColorMain}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Padding" Value="10 5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="5" BorderThickness="0" Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" BorderBrush="Transparent">
+                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource ColorMainAccent}" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="{StaticResource ColorMainActive}" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{StaticResource ColorMainUnactive}" />
+                </Trigger>
+            </Style.Triggers>
+
+        </Style>
+    </Application.Resources>
+</Application>
